@@ -1,0 +1,27 @@
+{
+  "atom_s": 128,
+  "atom_z": 128,
+  "token_s": 384,
+  "token_z": 128,
+  "num_bins": 64,
+  "num_blocks": 4,
+  "bond_type_feature": false,
+  "embedder_args": {
+    "atom_encoder_depth": 3
+  },
+  "msa_args": {
+    "msa_s": 64
+  },
+  "training_args": {
+    "recycling_steps": 3,
+    "max_lr": 0.0018
+  },
+  "pairformer_args": {
+    "token_s": 384,
+    "token_z": 128,
+    "num_blocks": 4
+  },
+  "use_templates": false,
+  "confidence_prediction": true,
+  "affinity_prediction": false
+}

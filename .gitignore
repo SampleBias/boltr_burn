@@ -1,0 +1,39 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+Cargo.lock
+
+# Local Boltr path override (see README)
+.cargo/config.toml.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python (golden exporters, boltz-reference)
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+env/
+
+# Model weights (download via boltr or bootstrap)
+weights/
+*.pt
+*.pth
+*.safetensors
+!**/tests/fixtures/**/*.safetensors
+
+# Outputs
+output/
+results/
+*.pdb
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

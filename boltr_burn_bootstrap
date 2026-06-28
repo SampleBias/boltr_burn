@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# Boltr_Burn development bootstrap — mirrors Boltr/Boltr_Boltz_bootstrap (Phase 0).
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$ROOT"
+
+echo "==> Boltr_Burn bootstrap"
+echo "    root: $ROOT"
+
+need() {
+  command -v "$1" >/dev/null 2>&1 || {
+    echo "missing required command: $1" >&2
+    exit 1
+  }
+}
+
+need cargo
+need rustc
+
+RUST_VER=$(rustc --version | awk '{print $2}')
+echo "    rustc: $RUST_VER"
+
+echo "==> Building workspace (CPU / burn-ndarray)"
+cargo build --release -p boltr-burn-cli
+
+echo "==> Running unit tests"
+cargo test --all
+
+CACHE="${HOME}/.cache/boltr"
+echo "==> Weight cache: $CACHE"
+for f in boltz2_conf.safetensors boltz2_aff.safetensors boltz2_hparams.json; do
+  if [[ -f "$CACHE/$f" ]]; then
+    echo "    found $f"
+  else
+    echo "    missing $f (run 'boltr download' from Boltr, or copy cache manually)"
+  fi
+done
+
+if [[ -f "$CACHE/boltz2_conf.safetensors" ]]; then
+  echo "==> Verify skeleton keys against boltz2_conf.safetensors"
+  cargo run -p boltr-backend-burn --release --bin verify_boltz2_burn_weights -- \
+    --partition "$CACHE/boltz2_conf.safetensors" || true
+fi
+
+echo "==> Doctor"
+./target/release/boltr-burn doctor
+
+echo "Bootstrap complete."

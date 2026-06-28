@@ -1,0 +1,20 @@
+[package]
+name = "boltr-backend-core"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Backend-agnostic Boltz2 hparams, predict args, and inference key taxonomy"
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+safetensors.workspace = true
+json5.workspace = true
+
+[dev-dependencies]
+tempfile = "3"

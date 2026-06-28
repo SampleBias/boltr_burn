@@ -1,0 +1,32 @@
+[package]
+name = "boltr-backend-burn"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Burn ML backend for Boltz-2 inference (mirrors boltr-backend-tch layout)"
+
+[features]
+default = ["burn-ndarray"]
+burn-cuda = ["burn/cuda", "burn/cubecl"]
+burn-wgpu = ["burn/wgpu"]
+burn-ndarray = ["burn/ndarray"]
+
+[dependencies]
+boltr-backend-core = { path = "../boltr-backend-core" }
+burn = { workspace = true, default-features = false }
+burn-store = { workspace = true, default-features = false, features = ["safetensors"] }
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+safetensors.workspace = true
+
+[dev-dependencies]
+tempfile = "3"
+
+[[bin]]
+name = "verify_boltz2_burn_weights"
+path = "src/bin/verify_boltz2_burn_weights.rs"

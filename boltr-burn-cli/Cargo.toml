@@ -1,0 +1,27 @@
+[package]
+name = "boltr-burn-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Development CLI for Boltr_Burn: doctor, verify-weights, golden tests"
+
+[[bin]]
+name = "boltr-burn"
+path = "src/main.rs"
+
+[features]
+default = []
+
+[dependencies]
+boltr-backend-burn = { path = "../boltr-backend-burn" }
+boltr-backend-core = { path = "../boltr-backend-core" }
+boltr-burn-bridge = { path = "../boltr-burn-bridge" }
+clap.workspace = true
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+dirs.workspace = true

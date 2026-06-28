@@ -1,0 +1,15 @@
+[package]
+name = "boltr-burn-bridge"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "FeatureBatch → Burn tensor bridge (collate predict seam)"
+
+[dependencies]
+boltr-backend-burn = { path = "../boltr-backend-burn" }
+boltr-backend-core = { path = "../boltr-backend-core" }
+boltr-io.workspace = true
+anyhow.workspace = true
+tracing.workspace = true
