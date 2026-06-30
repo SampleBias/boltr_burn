@@ -16,7 +16,7 @@ burn-ndarray = ["burn/ndarray"]
 [dependencies]
 boltr-backend-core = { path = "../boltr-backend-core" }
 burn = { workspace = true, default-features = false }
-burn-store = { workspace = true, default-features = false, features = ["safetensors"] }
+burn-store = { workspace = true, default-features = false, features = ["safetensors", "std"] }
 serde.workspace = true
 serde_json.workspace = true
 anyhow.workspace = true
