@@ -20,7 +20,7 @@ pub fn load_f32_tensor<B: Backend, const D: usize>(
     let view = st
         .tensor(name)
         .with_context(|| format!("missing tensor {name:?}"))?;
-    let shape: Vec<usize> = view.shape().iter().map(|&d| d as usize).collect();
+    let shape: Vec<usize> = view.shape().to_vec();
     anyhow::ensure!(
         shape.len() == D,
         "tensor {name} rank {} != expected {D}",

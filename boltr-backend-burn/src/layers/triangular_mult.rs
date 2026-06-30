@@ -53,8 +53,7 @@ impl<B: Backend> TriangleMultiplicationOutgoing<B> {
         let (a, b) = chunk2(x, 3);
         let x_tri = einsum_bikd_bjkd_bijd(a, b);
         let x_normed_out = self.norm_out.forward(x_tri);
-        let x = self.p_out.forward(x_normed_out) * sigmoid(self.g_out.forward(x_in));
-        x
+        self.p_out.forward(x_normed_out) * sigmoid(self.g_out.forward(x_in))
     }
 }
 
@@ -102,8 +101,7 @@ impl<B: Backend> TriangleMultiplicationIncoming<B> {
         let (a, b) = chunk2(x, 3);
         let x_tri = einsum_bkid_bkjd_bijd(a, b);
         let x_normed_out = self.norm_out.forward(x_tri);
-        let x = self.p_out.forward(x_normed_out) * sigmoid(self.g_out.forward(x_in));
-        x
+        self.p_out.forward(x_normed_out) * sigmoid(self.g_out.forward(x_in))
     }
 }
 

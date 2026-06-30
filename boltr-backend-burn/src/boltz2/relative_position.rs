@@ -50,7 +50,7 @@ impl<B: Backend> RelativePositionEncoder<B> {
         }
     }
 
-    pub fn forward(&self, rel: RelPosFeatures<'_, B>) -> Tensor<B, 4> {
+    pub fn forward(&self, rel: &RelPosFeatures<'_, B>) -> Tensor<B, 4> {
         let device = rel.asym_id.device();
         let b_same_chain = rel
             .asym_id
@@ -155,7 +155,7 @@ mod tests {
             sym_id: &sym_id,
             cyclic_period: &cyclic_period,
         };
-        let z = enc.forward(rel);
+        let z = enc.forward(&rel);
         assert_eq!(z.dims(), [b, n, n, token_z]);
     }
 }

@@ -1,6 +1,6 @@
 # Implementation plan
 
-This document turns [BOLTR_BURN_PRD_AND_SPEC.md](../BOLTR_BURN_PRD_AND_SPEC.md) into an actionable delivery schedule. **Current status: Phase 0 foundation (scaffold landed).**
+This document turns [BOLTR_BURN_PRD_AND_SPEC.md](../BOLTR_BURN_PRD_AND_SPEC.md) into an actionable delivery schedule. **Current status: Phase 1 trunk parity + Phase 2 diffusion/heads (landed).**
 
 ## Architecture summary
 
@@ -55,17 +55,19 @@ flowchart TB
 
 ## Phase 1 — Trunk parity (4–6 weeks)
 
-| Module (tch → burn) | Golden test |
-|---------------------|-------------|
-| `input_embedder.rs` | `BOLTR_RUN_INPUT_EMBEDDER_GOLDEN` |
-| `relative_position.rs` | trunk init golden |
-| `trunk.rs` | `collate_predict_trunk` |
-| `msa_module.rs` | MSA module golden |
-| `layers/pairformer.rs` | pairformer golden |
-| `layers/triangular_*.rs` | new triangle goldens |
-| `template_module.rs` | TBD |
+| Module (tch → burn) | Golden test | Status |
+|---------------------|-------------|--------|
+| `input_embedder.rs` | `BOLTR_RUN_INPUT_EMBEDDER_GOLDEN` | Done (tail + atom repr) |
+| `relative_position.rs` | trunk init golden | Done |
+| `trunk.rs` | `collate_predict_trunk` | Done |
+| `msa_module.rs` | MSA module golden | Done |
+| `layers/pairformer.rs` | pairformer golden | Done |
+| `layers/triangular_*.rs` | new triangle goldens | Done |
+| `template_module.rs` | TBD | Done (shape tests) |
 
 **Exit criteria:** Trunk output allclose vs `boltr-backend-tch` on collate fixture.
+
+**Remaining:** Full `predict_step_trunk` collate fixture vs tch A/B; input embedder full atom stack golden.
 
 **Daily loop:**
 
@@ -78,13 +80,15 @@ cargo test -p boltr-backend-burn collate_predict_trunk
 
 ## Phase 2 — Diffusion + heads (4–6 weeks)
 
-| Module | Golden |
-|--------|--------|
-| `diffusion*.rs`, `diffusion_conditioning.rs` | 1-step sampler golden |
-| `distogram.rs`, `confidence.rs`, `affinity.rs` | existing goldens |
-| Potentials / steering | `--use-potentials` fixtures |
+| Module | Golden | Status |
+|--------|--------|--------|
+| `diffusion*.rs`, `diffusion_conditioning.rs` | 1-step sampler golden | Done (fast path; extended steering stubbed) |
+| `distogram.rs`, `confidence.rs`, `affinity.rs` | existing goldens | Done (shape smoke; numerical goldens TBD) |
+| Potentials / steering | `--use-potentials` fixtures | Partial (`SteeringParams`; extended sampler `todo!`) |
 
 **Exit criteria:** Structure coordinates within regression tolerances on `minimal_protein_only.yaml`.
+
+**Remaining:** Wire full `predict_step`; potentials port; `BOLTR_RUN_DIFFUSION_GOLDEN` numerical allclose; regression on minimal protein fixture.
 
 ---
 
@@ -128,4 +132,4 @@ Track [Boltr TODO.md §5](https://github.com/SampleBias/Boltr/blob/main/TODO.md)
 
 ---
 
-*Last updated: 2026-06-28*
+*Last updated: 2026-06-29*

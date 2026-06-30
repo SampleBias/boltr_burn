@@ -59,6 +59,7 @@ impl<B: Backend> MsaLayerBlock<B> {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn forward(
         &self,
         z: Tensor<B, 4>,
@@ -115,6 +116,7 @@ pub struct MsaModule<B: Backend> {
 }
 
 impl<B: Backend> MsaModule<B> {
+    #[allow(clippy::too_many_arguments)]
     pub fn new(
         device: &Device<B>,
         token_s: usize,

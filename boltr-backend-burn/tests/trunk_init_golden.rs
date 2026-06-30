@@ -6,7 +6,6 @@ use boltr_backend_burn::checkpoint::{assert_allclose, load_f32_tensor, load_modu
 use boltr_backend_burn::{RelPosFeatures, RelativePositionEncoder};
 use burn::backend::NdArray;
 use burn::module::Module;
-use burn::record::Record;
 use burn::tensor::{Int, Tensor};
 
 type B = NdArray;
@@ -40,7 +39,7 @@ fn trunk_init_allclose_python_golden() {
     );
 
     let device = Default::default();
-    let token_s = 32_usize;
+        let _token_s = 32_usize;
     let token_z = 24_usize;
 
     let wrapper = RelPosWrapper {
@@ -67,7 +66,7 @@ fn trunk_init_allclose_python_golden() {
         sym_id: &sym_id,
         cyclic_period: &cyclic_period,
     };
-    let rel_rust = rel.forward(rel_f);
+    let rel_rust = rel.forward(&rel_f);
     let rel_ref = load_f32_tensor::<B, 4>(&path, "golden.rel_pos_out", &device).unwrap();
     assert_allclose("rel_pos_out", &rel_rust, &rel_ref, 1e-4, 1e-5);
 

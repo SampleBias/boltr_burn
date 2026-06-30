@@ -72,6 +72,7 @@ impl<B: Backend> PairformerLayer<B> {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn forward(
         &self,
         s: Tensor<B, 3>,
@@ -179,6 +180,7 @@ impl<B: Backend> PairformerModule<B> {
         Self { layers }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn forward(
         &self,
         s: Tensor<B, 3>,

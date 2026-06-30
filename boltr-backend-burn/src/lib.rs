@@ -14,10 +14,15 @@ pub mod tensor_ops;
 
 pub use attention::AttentionPairBiasV2;
 pub use backend::{BurnNdArrayBackend, BurnPredictStepFeats, BurnPredictStepOutput, NdArrayBackend};
-pub use boltz2::model::{Boltz2BurnModel, Boltz2BurnModelConfig};
+pub use boltz2::model::{Boltz2BurnModel, Boltz2BurnModelConfig, Boltz2DiffusionArgs};
 pub use boltz2::{
+    apply_affinity_mw_correction, AffinityModule, AffinityModuleConfig, AffinityOutput,
+    AtomDiffusion, AtomDiffusionConfig, AtomEncoderBatchFeats, AtomEncoderFlags,
+    BFactorModule, ConfidenceModule, ConfidenceModuleConfig, ConfidenceOutput,
+    DiffusionConditioning, DiffusionConditioningOutput, DiffusionSampleOutput, DistogramModule,
     InputEmbedder, MsaFeatures, MsaModule, RelPosFeatures, RelativePositionEncoder,
-    TemplateFeatures, TemplateV2Module, TrunkV2, BOLTZ_MSA_PROFILE_IN, BOLTZ_NUM_TOKENS,
+    SteeringParams, TemplateFeatures, TemplateV2Module, TrunkV2, BOLTZ_MSA_PROFILE_IN,
+    BOLTZ_NUM_TOKENS,
 };
 pub use device::{default_device, parse_device_spec, probe_backends, BackendProbe};
 pub use layers::{

@@ -28,15 +28,15 @@ The hard I/O and architecture decomposition work is done. This repo focuses on t
 
 ## Status
 
-**Phase 0 — Foundation** (scaffold complete)
+**Phase 1 — Trunk parity** + **Phase 2 — Diffusion + heads** (module ports landed)
 
 | Component | State |
 |-----------|-------|
 | `boltr-backend-core` | hparams, predict_args, inference keys, backend trait |
-| `boltr-backend-burn` | Burn skeleton model, device probes |
+| `boltr-backend-burn` | Trunk, pairformer, MSA, templates, diffusion sampler, distogram, confidence, affinity |
 | `boltr-burn-cli` | `doctor`, `verify-weights`, `hparams` |
-| `boltr-burn-bridge` | Stub (Phase 1) |
-| Trunk / diffusion / predict | Phase 1–2 |
+| `boltr-burn-bridge` | Stub (Phase 3 integration) |
+| End-to-end `predict` | Phase 3 (Boltr merge) |
 
 See **[docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md)** for the full phased roadmap.
 
